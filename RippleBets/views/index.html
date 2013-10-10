@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title>
+        RippleBets--Ripple博彩
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <link href="css/screen.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/slider.css" type="text/css" rel="stylesheet"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<div id="header">
+    <input type="hidden" id="hidHash">
+
+    <div class="wrap">
+        <a id="logo" href="#">
+            RippleBets
+        </a>
+        <ul id="nav" style="font-size:1.5em; color:#FCFCFC"><i>最具未来感的Ripple博彩系统，方便快捷，实时反馈！</i></ul>
+    </div>
+
+</div>
+<hr class="noscreen"/>
+<div class="wrap">
+    <strong class="title" style="font-size:1.5em">
+                <span>
+                    <a onclick="CloseDiv('ula');">
+                        如何运作
+                    </a>
+                </span>
+    </strong>
+
+    <div id="ula" style="display: none;">
+        <p class="pa">
+            当我们的Ripple钱包收到一笔xrp的时候，我们会根据目的标签(?dt=)来判断倍数，dt默认是2。
+            当在这个倍数获胜的时候，我们会发回相应倍数的xrp到发送者的钱包。</br>
+            你发送时候的赌注必须介于最小赌注和最大赌注之间（不同倍数时赌注范围不同），发送的xrp低于或者超过赌注范围时，将返回给发送者,并收取2%的费用。</br>
+            我们取sha512(密钥散列+传输散列)的第一个字节。如果这个数字小于((65535/倍数)-1%)，那就将获胜。
+            我们每天都用不同的密钥散列。你可以在secret.csv中找到过去所有的密钥散列，所有以后用的密钥散列都在hashes.csv中。
+        </p>
+    </div>
+    <strong class="title" style="font-size:1.5em">
+                <span>
+                    <a onclick="CloseDiv('divCenter');">
+                        开始游戏
+                    </a>
+                </span>
+    </strong>
+
+    <div id="divCenter">
+        <p class="pa">
+            您可以快速的开始游戏，只需要选择一个倍数然后发送xrp到下面的地址。如果您赢了，
+            您的奖金将会立即发回给你。祝您好运，玩的愉快！
+        </p>
+
+        <h2>
+            1. 选择一个倍数：
+        </h2>
+
+        <div class="slider">
+        </div>
+        <div>
+            <ul class="colsW clearfix">
+                <li>
+                        <span>
+                            获胜概率:
+                        </span>
+                        <span id="winn_odds" class="lib">
+                            
+                                49.5%
+                            
+                        </span>
+                </li>
+                <li>
+                        <span>
+                            倍数:
+                        </span>
+                        <span id="multiplier" class="lib">
+                            
+                                2X
+                            
+                        </span>
+                </li>
+            </ul>
+        </div>
+        <h2>
+            2. 发送xrp到下方地址（注意dt不可少）:
+        </h2>
+
+        <div>
+            <ul class="clearfix">
+                <li class="lia">
+                        <span>Ripple地址: rpyUV8W6XRvss6SBkAS8PyzGwMsSDxgNXW?dt=<span id="address" class="lib">2</span>
+                        </span>
+                </li>
+                <li class="lia">
+                        <span>
+                            最小赌注:
+                        </span>
+                        <span class="lib">
+                            1 XRP
+                        </span>
+                </li>
+                <li class="lia">
+                        <span>
+                            最大赌注:
+                        </span>
+                        <span id="max_bet" class="lib">
+                            5000 XRP
+                        </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <strong class="title" style="font-size:1.5em">
+                <span>
+                    <a>
+                        实时信息
+                    </a>
+                </span>
+    </strong>
+    <ul class="clock">
+        <li id="hours"></li>
+        <li id="point">:</li>
+        <li id="min"></li>
+        <li id="point">:</li>
+        <li id="sec"></li>
+    </ul>
+
+    <div id="divFoot">
+        <table id="lltable" cellspacing="0">
+            <tr>
+                <th style="width: 15%">时间</th>
+                <th style="width: 30%">地址</th>
+                <th style="width: 20%">金额</th>
+                <th style="width: 10%">赔率</th>
+                <th style="width: 10%">结果</th>
+                <th style="width: 25%">支付金额</th>
+            </tr>
+        </table>
+    </div>
+</div>
+<hr class="noscreen"/>
+<p class="footer" id="foot">
+            <span class="center">
+                &copy; 2013 -
+                <a href="#">
+                    RIPPLE BETS
+                </a>
+            </span>
+</p>
+</body>
+
+</html>
